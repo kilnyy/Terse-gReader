@@ -6,7 +6,7 @@
     </head>
     <body>
 <?php
-        echo system("python gReader.py"); 
+        system("python gReader.py"); 
 ?>
     </body>
 </html>
