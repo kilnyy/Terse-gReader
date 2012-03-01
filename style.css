@@ -1,0 +1,12 @@
+body
+{
+    width:800px; margin:0 auto;
+    font-family:arial,sans-serif;
+}
+
+.rb
+{
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px; 
+}
