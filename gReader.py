@@ -4,9 +4,10 @@ import urllib
 import urllib2
 import xml.etree.ElementTree as etree 
 import re
+import sys, os
 LOGIN_URL = 'https://www.google.com/accounts/ClientLogin'
-EMAIL = 'kilnyy@gmail.com'
-PASSWORD = 'x1m2z3l4n5'
+EMAIL = sys.argv[1]
+PASSWORD = sys.argv[2]
 
 request = urllib2.Request(LOGIN_URL, urllib.urlencode({
     'service': 'reader',
