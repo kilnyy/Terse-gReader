@@ -24,7 +24,7 @@
 ?>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8; width=device-width"/>
         <title>gReader</title>
         <link rel=stylesheet href="style.css" type="text/css" /> 
     </head>
