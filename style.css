@@ -1,10 +1,13 @@
 body
 {
-    margin:0px auto;
-    padding: 10px;
     font-family:arial,sans-serif;
+    word-wrap: break-word;
 }
 
+div
+{
+    display: block;
+}
 .rb
 {
     -webkit-border-radius: 8px;
@@ -20,11 +23,26 @@ body
 h1
 {
     text-align: center;
+    font-size: 20px;
 }
+
+h3
+{
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
 
 div.entry
 {
-    padding: 10px;
-    margin: 20px;
-    border: 2px solid #ccc;
+    border: 2px solid #bbb;
+    overflow: auto;
+    padding: 0.8%;
+    margin: 1%;
+}
+
+div.entry .content
+{
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
 }
