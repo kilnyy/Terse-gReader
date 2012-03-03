@@ -31,7 +31,7 @@
     </head>
     <body>
         <div class="rb">
-            <h1>Reader</h1>
+            <h1>gReader</h1>
         </div>
 <?php
     if ($has_login) {
