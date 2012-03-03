@@ -4,8 +4,8 @@
     }
         
     $has_login = true;
-    if (isset($_COOKIE['21INSIST_SESSION_ID'])) {
-        $sid = $_COOKIE['21INSIST_SESSION_ID'];
+    if (isset($_COOKIE['GREADER_SESSION_ID'])) {
+        $sid = $_COOKIE['GREADER_SESSION_ID'];
         session_id($sid);
         session_start();
         if (isset($_SESSION['user']) && isset($_SESSION['passwd'])) {
@@ -17,7 +17,7 @@
             session_start();
             $_SESSION['user'] = $_POST['user'];
             $_SESSION['passwd'] = $_POST['passwd'];
-            setcookie('21INSIST_SESSION_ID', session_id(), time() + 60*60*24*30, "/");
+            setcookie('GREADER_SESSION_ID', session_id(), time() + 60*60*24*30, "/");
             $has_login = true;
         }
     }
@@ -29,19 +29,14 @@
         <link rel=stylesheet href="style.css" type="text/css" /> 
     </head>
     <body>
+        <div class="rb">
+            <h1>你的gReader未读列表</h1>
+        </div>
 <?php
     if ($has_login) {
         getNews($_SESSION['user'], $_SESSION['passwd']);
     } else {
-?>
-        <form method="post" action="index.php">
-            <span>用户名：</span>
-            <input type="text" name="user" />
-            <span>密码：</span>
-            <input type="password" name="passwd" />
-            <input type="submit" name="submit" value="登录" />
-        </form>
-<?php
+        include("login.php");
     }
 ?>
     </body>

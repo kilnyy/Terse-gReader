@@ -1,6 +1,7 @@
 body
 {
-    width:800px; margin:0 auto;
+    margin:0px auto;
+    padding: 30px;
     font-family:arial,sans-serif;
 }
 
@@ -9,4 +10,20 @@ body
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px; 
+}
+
+.rfloat
+{
+    float: right;
+}
+
+h1
+{
+    text-align: center;
+}
+
+div.entry
+{
+    padding: 10px;
+    border: 2px solid #ccc;
 }
