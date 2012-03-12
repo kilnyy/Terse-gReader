@@ -32,31 +32,33 @@ class Htmlmaker:
         f = urllib2.urlopen(request)
         return f.read()
 
-    def get_html(self, xml):
-        result = ""
+    def get_text(self, entry, name):
+        all_things = entry.findall(name)
+        for thing in all_things:
+            return  thing.text.encode('utf-8')
+
+    def get_entrys(self, xml):
         w3atom = '{http://www.w3.org/2005/Atom}'
         tree = etree.fromstring(xml)
         all_entrys = tree.findall(w3atom + 'entry')
+        entrys = []
         for entry in all_entrys:
-            result += '<div class="entry rb">\n'
-            all_titles = entry.findall(w3atom + 'title')
-            for title in all_titles:
-                result += "<h3>\n" + title.text.encode('utf-8') + "</h3>\n"
-            all_content = entry.findall(w3atom + 'content')
-            for content in all_content:
-                result += '<div class="content">\n' + content.text.encode('utf-8') + "</div>\n"
-            all_summary = entry.findall(w3atom + 'summary')
-            for summary in all_summary:
-                result += '<div class="content">\n' + summary.text.encode('utf-8') + "</div>\n"
-            result += '</div>\n'
-        result = re.sub('<img[^>]*>', '', result) 
-        result = re.sub('<iframe.*>.*<\/iframe>', '', result)
-        return result
+            tmp_entry = {}
+            tmp_entry['title'] = self.get_text(entry, w3atom + 'title')
+            tmp_entry['content'] = self.get_text(entry, w3atom + 'content')
+            if (not tmp_entry['content']):
+                tmp_entry['content'] = self.get_text(entry, w3atom + 'summary')
+            entrys.append(tmp_entry)
+
+        for entry in entrys:
+            entry['content'] = re.sub('<img[^>]*>', '', entry['content']) 
+            entry['content'] = re.sub('<iframe.*>.*<\/iframe>', '', entry['content'])
+        return entrys
 
     def run(self):
         (auth, sid) = self.login(self.email, self.passwd)
         xml = self.get_unread(auth, sid)
-        return self.get_html(xml)
+        return self.get_entrys(xml)
 
 if __name__ == '__main__':
     maker = Htmlmaker(sys.argv[1], sys.argv[2])
