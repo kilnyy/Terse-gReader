@@ -12,6 +12,7 @@ if usecgi:
     import cgitb
     cgitb.enable()
     import sys
+    os.environ['REAL_SCRIPT_NAME'] = ""
 
 
 urls = (
