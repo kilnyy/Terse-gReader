@@ -12,7 +12,8 @@ if usecgi:
     import cgitb
     cgitb.enable()
     import sys
-    os.environ['REAL_SCRIPT_NAME'] = ""
+    import os
+    os.environ['REAL_SCRIPT_NAME'] = "/greader"
 
 
 urls = (
