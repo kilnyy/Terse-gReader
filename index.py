@@ -2,7 +2,7 @@
 #coding=utf-8
 
 import web
-import htmlmaker
+import controller
 
 web.config.debug = False
 
@@ -18,7 +18,8 @@ if usecgi:
 
 urls = (
     '/', 'index',
-    '/login', 'login'
+    '/login', 'login',
+    '/doread', 'doread'
 )
 
 app = web.application(urls, globals())
@@ -29,8 +30,8 @@ class index:
 
     def GET(self):
         if session.email and session.password:
-            maker = htmlmaker.Htmlmaker(session.email, session.password)
-            return render.index(maker.run())
+            ctrl = controller.Controller(session.email, session.password)
+            return render.index(ctrl.get_data())
         else:
             session.kill()
             raise web.seeother('/login')
@@ -52,7 +53,17 @@ class login:
         else:
             return 'LoginFailed'
 
-    
+class doread:
+
+    def POST(self):
+        data = web.input()
+        if session.email and session.password:
+            ctrl = controller.Controller(session.email, session.password)
+            ctrl.do_read(data.entryid)
+            return ''
+        else:
+            session.kill()
+            raise web.seeother('login')
 
 if __name__ == "__main__" :
     app.run()
