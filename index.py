@@ -6,14 +6,11 @@ import controller
 
 web.config.debug = False
 
-usecgi = True
-
-if usecgi:
-    import cgitb
-    cgitb.enable()
-    import sys
-    import os
-    os.environ['REAL_SCRIPT_NAME'] = "/greader"
+import cgitb
+cgitb.enable()
+import sys
+import os
+os.environ['REAL_SCRIPT_NAME'] = "/greader"
 
 
 urls = (
@@ -68,13 +65,12 @@ class doread:
 if __name__ == "__main__" :
     app.run()
 
-if usecgi:
-    def cgidebugerror():
-        _wrappedstdout = sys.stdout
+def cgidebugerror():
+    _wrappedstdout = sys.stdout
 
-        sys.stdout = web._oldstdout
-        cgitb.handler()
+    sys.stdout = web._oldstdout
+    cgitb.handler()
 
-        sys.stdout = _wrappedstdout
+    sys.stdout = _wrappedstdout
 
-    web.internalerror = cgidebugerror
+web.internalerror = cgidebugerror

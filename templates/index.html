@@ -21,7 +21,7 @@ $def with (entrys)
                 return a;
             }
 
-            var Entry = function (element) {
+            var Entry = function(element) {
                 this.entryId = element.getAttribute('entryid');
                 this.y = element.offsetTop + element.offsetHeight;
                 this.doRead = function () {
@@ -34,16 +34,25 @@ $def with (entrys)
 
             var divEntrys = getElementsByClassName("entry");
             var entrys = [];
-            for (var i in divEntrys) {
-                entrys.push(new Entry(divEntrys[i]));
+            function refreshEntrys() {
+                entrys = [];
+                for (var i in divEntrys) {
+                    entrys.push(new Entry(divEntrys[i]));
+                }
             }
 
             var curEntryId = 0;
+            var lastWindowWidth = 0;
             window.onscroll = function () {
-                var y = document.body.scrollTop + window.innerHeight;
-                while (curEntryId < entrys.length && entrys[curEntryId].y <= y) {
-                    entrys[curEntryId].doRead();
-                    curEntryId++;
+                if (lastWindowWidth != window.innerWidth) {
+                    refreshEntrys();
+                    lastWindowWidth = window.innerWidth;
+                } else {
+                    var y = document.body.scrollTop + window.innerHeight;
+                    while (curEntryId < entrys.length && entrys[curEntryId].y <= y) {
+                        entrys[curEntryId].doRead();
+                        curEntryId++;
+                    }
                 }
             }
 
@@ -61,7 +70,7 @@ $def with (entrys)
                 <div class="content">$:entry['content']</div>
             </div>
         <div>
-            Powered By <a href="www.kilnyy.com">kilnyy</a>
+            Powered By <a href="http://www.kilnyy.com">kilnyy</a>
         </div>
     </body>
 </html>
