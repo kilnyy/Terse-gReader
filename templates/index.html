@@ -7,12 +7,48 @@ $def with (entrys)
         <title>gReader</title>
         <link rel=stylesheet href="static/style.css" type="text/css" /> 
         <script type="text/javascript">
-        function doRead(entryid) {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "doread", true);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlhttp.send("entryid=" + entryid);
+        onload=function(){
+
+            function getElementsByClassName(classname, node)  {
+                if(!node) node = document.getElementsByTagName("body")[0];
+                var a = [];
+                var re = new RegExp('\\b' + classname + '\\b');
+                var els = node.getElementsByTagName("*");
+                for(var i=0,j=els.length; i<j; i++)
+                    if(re.test(els[i].className)) {
+                        a.push(els[i]);
+                    }
+                return a;
+            }
+
+            var Entry = function (element) {
+                this.entryId = element.getAttribute('entryid');
+                this.y = element.offsetTop + element.offsetHeight;
+                this.doRead = function () {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("POST", "doread", true);
+                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xmlhttp.send("entryid=" + this.entryId);
+                };
+            };
+
+            var divEntrys = getElementsByClassName("entry");
+            var entrys = [];
+            for (var i in divEntrys) {
+                entrys.push(new Entry(divEntrys[i]));
+            }
+
+            var curEntryId = 0;
+            window.onscroll = function () {
+                var y = document.body.scrollTop + window.innerHeight;
+                while (curEntryId < entrys.length && entrys[curEntryId].y <= y) {
+                    entrys[curEntryId].doRead();
+                    curEntryId++;
+                }
+            }
+
         }
+    
         </script>
     </head>
     <body>
@@ -20,10 +56,13 @@ $def with (entrys)
             <h1>gReader</h1>
         </div>
         $for entry in entrys:
-            <div class="entry rb">
+            <div class="entry rb" entryid="$entry['id']" >
                 <h3> $:entry['title'] </h3>
                 <div class="content">$:entry['content']</div>
-                <button type="button" entryid="$entry['id']" onclick="doRead(this.getAttribute('entryid'))" >已读</button>
+                <button type="button" onclick="doRead())" >已读</button>
             </div>
+        <div>
+            Powered By <a href="www.kilnyy.com">kilnyy</a>
+        </div>
     </body>
 </html>
