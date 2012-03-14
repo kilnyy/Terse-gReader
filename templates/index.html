@@ -8,7 +8,6 @@ $def with (entrys)
         <link rel=stylesheet href="static/style.css" type="text/css" /> 
         <script type="text/javascript">
         onload=function(){
-
             function getElementsByClassName(classname, node)  {
                 if(!node) node = document.getElementsByTagName("body")[0];
                 var a = [];
@@ -66,11 +65,14 @@ $def with (entrys)
         </div>
         $for entry in entrys:
             <div class="entry rb" entryid="$entry['id']" >
-                <h3> $:entry['title'] </h3>
+                <div class="title">
+                    <h3> $entry['title'] </h3>
+                    <span class="source"> - $entry['source']</span>
+                </div>
                 <div class="content">$:entry['content']</div>
             </div>
-        <div>
-            Powered By <a href="http://www.kilnyy.com">kilnyy</a>
+        <div class="footnote">
+            Powered By <a href="http://www.kilnyy.com">Kilnyy</a>
         </div>
     </body>
 </html>

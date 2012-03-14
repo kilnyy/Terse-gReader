@@ -27,14 +27,14 @@ class Controller:
 
     def get_unread(self, auth, sid):
         headers = {'Authorization': 'GoogleLogin auth=' + auth, 'Cookie': sid}
-        request = urllib2.Request("https://www.google.com/reader/atom/user/-/state/com.google/reading-list?xt=user/-/state/com.google/read", headers=headers)
+        GET_UNREAD_URL = "https://www.google.com/reader/atom/user/-/state/com.google/reading-list?n=10&xt=user/-/state/com.google/read";
+        request = urllib2.Request(GET_UNREAD_URL, headers=headers)
         f = urllib2.urlopen(request)
         return f.read()
 
-    def get_text(self, entry, name):
-        all_things = entry.findall(name)
-        for thing in all_things:
-            return  thing.text.encode('utf-8')
+    def get_single(self, node, name):
+        all_things = node.findall(name)
+        return all_things[0]
 
     def get_entrys(self, xml):
         w3atom = '{http://www.w3.org/2005/Atom}'
@@ -43,11 +43,12 @@ class Controller:
         entrys = []
         for entry in all_entrys:
             tmp_entry = {}
-            tmp_entry['title'] = self.get_text(entry, w3atom + 'title')
-            tmp_entry['id'] = self.get_text(entry, w3atom + 'id')
-            tmp_entry['content'] = self.get_text(entry, w3atom + 'content')
+            tmp_entry['title'] = self.get_single(entry, w3atom + 'title').text.encode('utf-8')
+            tmp_entry['source'] = self.get_single(self.get_single(entry, w3atom + 'source'), w3atom + 'title').text.encode('utf-8')
+            tmp_entry['id'] = self.get_single(entry, w3atom + 'id').text.encode('utf-8')
+            tmp_entry['content'] = self.get_single(entry, w3atom + 'content').text.encode('utf-8')
             if (not tmp_entry['content']):
-                tmp_entry['content'] = self.get_text(entry, w3atom + 'summary')
+                tmp_entry['content'] = self.get_single(entry, w3atom + 'summary').text.encode('utf-8')
             entrys.append(tmp_entry)
 
         for entry in entrys:

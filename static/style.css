@@ -8,16 +8,12 @@ div
 {
     display: block;
 }
+
 .rb
 {
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px; 
-}
-
-.rfloat
-{
-    float: right;
 }
 
 h1
@@ -29,9 +25,20 @@ h1
 h3
 {
     font-size: 16px;
-    border-bottom: 1px solid #ddd;
+    display: inline;
 }
 
+span.source
+{
+    font-size: 10px;
+    color: #bbb;
+    display: inline;
+}
+
+div.title
+{
+    border-bottom: 1px solid #ddd;
+}
 
 div.entry
 {
@@ -44,5 +51,10 @@ div.entry
 div.entry .content
 {
     font-size: 13px;
-    border-bottom: 1px solid #ddd;
+}
+
+div.footnote
+{
+    text-align: center;
+    border-top: 1px solid #ddd;
 }
