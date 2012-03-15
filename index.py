@@ -10,7 +10,7 @@ import cgitb
 cgitb.enable()
 import sys
 import os
-os.environ['REAL_SCRIPT_NAME'] = "/greader"
+os.environ['REAL_SCRIPT_NAME'] = ""
 
 
 urls = (

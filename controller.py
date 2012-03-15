@@ -34,7 +34,15 @@ class Controller:
 
     def get_single(self, node, name):
         all_things = node.findall(name)
-        return all_things[0]
+        if len(all_things):
+            return all_things[0]
+        return None
+
+    def get_text(self, node):
+        if node is not None:
+            return node.text.encode('utf-8')
+        else:
+            return ''
 
     def get_entrys(self, xml):
         w3atom = '{http://www.w3.org/2005/Atom}'
@@ -43,12 +51,12 @@ class Controller:
         entrys = []
         for entry in all_entrys:
             tmp_entry = {}
-            tmp_entry['title'] = self.get_single(entry, w3atom + 'title').text.encode('utf-8')
-            tmp_entry['source'] = self.get_single(self.get_single(entry, w3atom + 'source'), w3atom + 'title').text.encode('utf-8')
-            tmp_entry['id'] = self.get_single(entry, w3atom + 'id').text.encode('utf-8')
-            tmp_entry['content'] = self.get_single(entry, w3atom + 'content').text.encode('utf-8')
+            tmp_entry['title'] = self.get_text(self.get_single(entry, w3atom + 'title'))
+            tmp_entry['source'] = self.get_text(self.get_single(self.get_single(entry, w3atom + 'source'), w3atom + 'title'))
+            tmp_entry['id'] = self.get_text(self.get_single(entry, w3atom + 'id'))
+            tmp_entry['content'] = self.get_text(self.get_single(entry, w3atom + 'content'))
             if (not tmp_entry['content']):
-                tmp_entry['content'] = self.get_single(entry, w3atom + 'summary').text.encode('utf-8')
+                tmp_entry['content'] = self.get_text(self.get_single(entry, w3atom + 'summary'))
             entrys.append(tmp_entry)
 
         for entry in entrys:
