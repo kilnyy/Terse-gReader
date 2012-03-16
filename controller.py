@@ -54,11 +54,12 @@ class Controller:
             tmp_entry['title'] = self.get_text(self.get_single(entry, w3atom + 'title'))
             tmp_entry['source'] = self.get_text(self.get_single(self.get_single(entry, w3atom + 'source'), w3atom + 'title'))
             tmp_entry['id'] = self.get_text(self.get_single(entry, w3atom + 'id'))
+            tmp_entry['link'] = self.get_single(entry, w3atom + 'link').get('href','')
             tmp_entry['content'] = self.get_text(self.get_single(entry, w3atom + 'content'))
             if (not tmp_entry['content']):
                 tmp_entry['content'] = self.get_text(self.get_single(entry, w3atom + 'summary'))
             entrys.append(tmp_entry)
-
+        
         for entry in entrys:
             entry['content'] = re.sub('<img[^>]*>', '', entry['content']) 
             entry['content'] = re.sub('<iframe.*>.*<\/iframe>', '', entry['content'])
