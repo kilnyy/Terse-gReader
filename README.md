@@ -5,7 +5,7 @@ Terse gReader is a simple greader client use web.py
 
  * Remove all the picture from article in order to cut off dage usage.
  * Automatic mark articles as read.
- * Easy to used in mobile phone. 
+ * Easy to used on mobile phone. 
 
 ###Requirements:
  * web.py
