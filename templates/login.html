@@ -4,23 +4,25 @@ $def with ()
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="static/favicon.ico" title="Favicon">
-        <title>gReader</title>
+        <title>Terse gReader</title>
         <link rel=stylesheet href="static/style.css" type="text/css" /> 
     </head>
     <body>
-        <div class="rb">
-            <h1>gReader</h1>
-            <form method="post" action="login">
-                <fieldset>
-                    <label for="email">Email</label>
-                    <input id="email" type="email" name="email"/>
-                </fieldset>
-                <fieldset>
-                    <label for="passwd">Password</label>
-                    <input id="passwd" type="password" name="password"/>
-                </fieldset>
-                <input type="submit" name="submit" value="登录" />
-            </form>
+        <h1>Terse gReader</h1>
+        <div class="login-box rb">
+            <div class="login-main">
+                <form method="post" action="login">
+                    <fieldset>
+                        <input id="email" type="email" name="email"/>
+                        <label for="email">Email</label>
+                    </fieldset>
+                    <fieldset>
+                        <input id="passwd" type="password" name="password"/>
+                        <label for="passwd">Password</label>
+                    </fieldset>
+                    <input type="submit" name="submit" value="登录" />
+                </form>
+            </div>
         </div>
     </body>
 </html>

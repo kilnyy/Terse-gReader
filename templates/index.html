@@ -4,7 +4,7 @@ $def with (entrys)
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="static/favicon.ico" title="Favicon">
-        <title>gReader</title>
+        <title>Terse Greader</title>
         <link rel=stylesheet href="static/style.css" type="text/css" /> 
         <script type="text/javascript">
         onload=function(){
@@ -61,7 +61,7 @@ $def with (entrys)
     </head>
     <body>
         <div class="rb">
-            <h1>gReader</h1>
+            <h1>Terse gReader</h1>
         </div>
         $for entry in entrys:
             <div class="entry rb" entryid="$entry['id']" >
@@ -70,6 +70,10 @@ $def with (entrys)
                     <span class="source"> - $entry['source']</span>
                 </div>
                 <div class="content">$:entry['content']</div>
+            </div>
+        $if len(entrys) == 0:
+            <div class="hint">
+                暂时没有未读文章，稍后刷新试试？
             </div>
         <div class="footnote">
             Powered By <a href="http://www.kilnyy.com">Kilnyy</a>
