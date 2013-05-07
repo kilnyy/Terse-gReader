@@ -35,6 +35,14 @@ span.source
     display: inline;
 }
 
+div.hint
+{
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    font-size: 15px;
+}
+
 div.title
 {
     border-bottom: 1px solid #ddd;
@@ -57,10 +65,69 @@ div.footnote
 {
     text-align: center;
     border-top: 1px solid #ddd;
+    font-size: 13px;
+    color: #999;
 }
 
 a.title-link
 {
     text-decoration: none;
     color: #333;
+}
+
+div.login-box
+{
+    border: 2px solid #bbb;
+    width: 330px;
+    margin: 0px auto;
+    font-weight: bold;
+}
+
+div.login-main
+{
+    width: 70%;
+    margin: 0px auto;
+    padding: 30px;
+}
+
+fieldset
+{
+    border: none;
+}
+
+form input[type="submit"]
+{
+    margin: 7px 18px;
+    float: right;
+    font-size: 14px;
+    border: 1px solid #bbb;
+    background-color: #ddd;
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+
+form input[type="submit"]:hover,
+form input[type="submit"]:focus
+{
+    background-color: #eee;
+}
+
+form input[type="submit"]:active
+{
+    bakcground-color: #ccc;
+}
+
+fieldset input
+{
+    float: right;
+    height: 25px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    background-color: #eee;
+}
+
+fieldset label
+{
+    font-size: 14px;
+    line-height: 25px;
 }

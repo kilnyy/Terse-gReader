@@ -1,4 +1,4 @@
-#!/home2/kilnyyco/python/bin/python
+#!/usr/bin/env python
 #coding=utf-8
 
 import web
@@ -10,7 +10,6 @@ import cgitb
 cgitb.enable()
 import sys
 import os
-os.environ['REAL_SCRIPT_NAME'] = "/greader"
 
 
 urls = (
